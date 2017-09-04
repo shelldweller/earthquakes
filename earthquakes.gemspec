@@ -10,5 +10,6 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
   s.license       = 'Public domain'
 
+  s.add_dependency('colorize')
   s.add_development_dependency('rspec')
 end
