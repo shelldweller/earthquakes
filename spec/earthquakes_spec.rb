@@ -1,5 +1,7 @@
 describe Earthquakes do
   it 'runs' do
-    expect(true).to be true
+    uri = URI(Earthquakes::DATA_URL)
+    expect(Net::HTTP).to receive(:get).with(uri)
+    Earthquakes.run
   end
 end
