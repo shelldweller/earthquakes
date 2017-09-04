@@ -53,7 +53,7 @@ describe Earthquakes do
   describe 'earthquake_info' do
     it 'extracts earthquake info from properties' do
       result = Earthquakes.earthquake_info(properties1)
-      expect(result).to eql(properties1['title'])
+      expect(result).to match(properties1['title'])
     end
   end
 end
