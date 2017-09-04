@@ -7,7 +7,12 @@ class Earthquakes
   class << self
     def run
       response_str = Net::HTTP.get(URI(DATA_URL))
-      JSON.parse(response_str)
+      data = JSON.parse(response_str)
+      features(data)
+    end
+
+    def features(geojson)
+      geojson['features'].map { |x| x['properties'] }
     end
   end
 end

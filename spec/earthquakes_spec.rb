@@ -32,9 +32,22 @@ describe Earthquakes do
     }
   end
 
-  it 'runs' do
-    uri = URI(Earthquakes::DATA_URL)
-    expect(Net::HTTP).to receive(:get).with(uri).and_return(data.to_json)
-    Earthquakes.run
+  describe 'run' do
+    it 'runs' do
+      uri = URI(Earthquakes::DATA_URL)
+      expect(Net::HTTP).to receive(:get).with(uri).and_return(data.to_json)
+      Earthquakes.run
+    end
+  end
+
+  describe 'features' do
+    it 'extracts features from geojson' do
+      result = Earthquakes.features(data)
+      expected = [
+        data['features'][0]['properties'],
+        data['features'][1]['properties']
+      ]
+      expect(result).to eql(expected)
+    end
   end
 end
