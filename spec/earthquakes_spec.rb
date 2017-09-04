@@ -1,4 +1,22 @@
 describe Earthquakes do
+  let(:properties1) do
+    {
+      'mag' => 2.5,
+      'time' => 1504535113904,
+      'updated' => 1504535325972,
+      'title' => 'M 2.5 - 101km NE of Chignik Lake, Alaska'
+    }
+  end
+
+  let(:properties2) do
+    {
+      'mag' => 4.5,
+      'time' => 1504528715870,
+      'updated' => 1504529542040,
+      'title' => "M 4.5 - 149km S of Ust'-Kamchatsk Staryy, Russia"
+    }
+  end
+
   let(:data) do
     {
       'metadata' => {
@@ -10,24 +28,8 @@ describe Earthquakes do
         'count' => 45
       },
       'features' => [
-        {
-          'type' => 'Feature',
-          'properties' => {
-            'mag' => 2.5,
-            'time' => 1504535113904,
-            'updated' => 1504535325972,
-            'title' => 'M 2.5 - 101km NE of Chignik Lake, Alaska'
-          }
-        },
-        {
-          'type' => 'Feature',
-          'properties' => {
-            'mag' => 4.5,
-            'time' => 1504528715870,
-            'updated' => 1504529542040,
-            'title' => "M 4.5 - 149km S of Ust'-Kamchatsk Staryy, Russia"
-          }
-        }
+        { 'type' => 'Feature', 'properties' => properties1 },
+        { 'type' => 'Feature', 'properties' => properties2 }
       ]
     }
   end
@@ -43,10 +45,7 @@ describe Earthquakes do
   describe 'features' do
     it 'extracts features from geojson' do
       result = Earthquakes.features(data)
-      expected = [
-        data['features'][0]['properties'],
-        data['features'][1]['properties']
-      ]
+      expected = [properties1, properties2]
       expect(result).to eql(expected)
     end
   end
